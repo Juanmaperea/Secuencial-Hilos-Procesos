@@ -9,17 +9,26 @@ from fibonacci import fibo
 from time import time
 import multiprocessing
 import sys
+import os
 
 def main():
-	vectorF = []
-	ts = time()
-	for x in range(144):
-		y = fibo(33)
-		print(f"y: {y}")
-		vectorF.append(y)
-	print(f"El fibonacci es {y}")
-	print(f"Tomo {time() - ts}")
 
+	# Inicializando vector en 33 para 144 cálculos:
+	max_fibo = 33
+	tam = 10 # Tamaño del vector (Número de Fibonaccis calculados).
+	vectorSeq = [max_fibo] * tam
+	num_cpus = multiprocessing.cpu_count()
+	
+	# Calculando los valores Fibonacci y almacenando en el vector:
+	print(f"Calculando el fibonacci {max_fibo} en {num_cpus} CPUs")
+	ts = time()
+	for x in range(tam):
+		y = fibo(max_fibo)
+		vectorSeq[x] = y
+		print(f"El fibonacci de {max_fibo} es: {y}")
+
+	# Imprimiendo tiempo de ejecución:	
+	print(f"Tomo {time() - ts}")
 
 if __name__ == "__main__":
   main()
